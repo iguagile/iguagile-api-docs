@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "iguagile management rest api",
+    "version": "1.0.0",
+    "title": "iguagile-api"
+  },
+  "basePath": "/v1/api",
+  "tags": [
+    {
+      "name": "Room"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/create": {
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "create",
+        "description": "create new room",
+        "operationId": "name",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success create room",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Room": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "max_user": {
+          "type": "number",
+          "default": 70,
+          "maximum": 10,
+          "minimum": 1
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "failed"
+          ],
+          "example": "success"
+        },
+        "message": {
+          "type": "string",
+          "example": "created room"
+        },
+        "room_id": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    }
+  }
+}
